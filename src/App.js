@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import { keyframes } from "styled-components";
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import {StyledDiv, Div} from './StyledDivs';
+import TeamList from "./TeamList";
+import Home from './Home'
+
 
 const teamURL = "https://www.svgrepo.com/show/332577/team.svg";
 const addToTeam = "https://www.svgrepo.com/show/347812/person-add.svg";
@@ -17,10 +20,10 @@ function App() {
         <Link to = "team"><img src = {teamURL}/>Team</Link>
         <Link to = "teambuilder"><img src = {addToTeam}/>Add to Team</Link>
       </Div>
-    <StyledDiv>
-      <h1>Team Builder</h1>
-      <h5>A new team solution</h5>
-    </StyledDiv>
+      <Routes>
+        <Route path = '/' element = {<Home />}/>
+        <Route path = 'team' element = {<TeamList />}/>
+      </Routes>
     </div>
   );
 }

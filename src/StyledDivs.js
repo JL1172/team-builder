@@ -141,5 +141,30 @@ a:hover {
 
 `
 
+const Styled = styled.div`
+background-image : linear-gradient(to right, white 0%, lightblue 100%);
+height : 100vh;
+display : flex;
+flex-direction : column ;
+justify-content : center;
+align-items : center;
+div {
+    width : 75%;
+    height : 75%;
+    display : flex;
+    align-items : flex-start;
+    justify-content : center;
+    padding-top : 1rem;
+    background-color : white;
+    border-radius : 10px;
+    box-shadow : 2px 2px 2px 2px whitesmoke;
+    h1 {
+        border-bottom : 2px solid lightblue;
+        opacity : .8;
+    }
+}
+`
+
 export { StyledDiv };
 export { Div }; 
+export {Styled};

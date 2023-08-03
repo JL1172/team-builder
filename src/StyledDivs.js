@@ -93,8 +93,8 @@ const StyledDiv = styled.div`
         left : 0;
         bottom : 0;
         width : 0;
-        border-bottom : 1px solid lightblue;
-        box-shadow : 2px 2px 2px rgb(105, 184, 211);
+        border-bottom : 3px solid lightblue;
+        border-radius : 5px;
         animation : ${hoverKf} 2s linear forwards;
     }
   }

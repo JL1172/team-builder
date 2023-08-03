@@ -108,7 +108,7 @@ const StyledDiv = styled.div`
 
 const Div = styled.div`
 padding: 1rem;
-background-image : linear-gradient(to right, white 0%, lightblue 100%);
+background-image : inherit;
 display : flex;
 justify-content : space-around;
 font-family : inherit;
@@ -151,9 +151,7 @@ align-items : center;
 div {
     width : 75%;
     height : 75%;
-    display : flex;
-    align-items : flex-start;
-    justify-content : center;
+    text-align : center;
     padding-top : 1rem;
     background-color : white;
     border-radius : 10px;
@@ -162,9 +160,20 @@ div {
         border-bottom : 2px solid lightblue;
         opacity : .8;
     }
+    form {
+        display : flex;
+        flex-direction : column; 
+        align-items : flex-start; 
+        margin : 2rem;
+    }
+     input{
+        margin-bottom : 2rem;
+        display : flex;
+        width : 20%;
+      }
 }
 `
 
 export { StyledDiv };
-export { Div }; 
-export {Styled};
+export { Div };
+export { Styled };

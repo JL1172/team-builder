@@ -7,6 +7,7 @@ import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import {Styled} from './StyledDivs';
 
 export default function Team(props) {
+
     return (
         <Styled>
             <div>

@@ -32,9 +32,10 @@ div {
 
 export default function Team(props) {
     const navigate = useNavigate();
-    const { fname, lname, email, role, id, team, setTeam, deleted, setDeleted } = props;
+    const { fname, lname, email, role, id, team, setTeam, deleted, setDeleted, finalDecision, setFinalDecision } = props;
     const nav = () => {
-        navigate(`${id}`)
+        // navigate(`${id}`)
+        setDeleted(deleted => deleted = true)
     }
 
     const deleter = () => {
@@ -44,9 +45,10 @@ export default function Team(props) {
         let result = Object.values(team).map(t => t.id);
         if (result.includes(id)) {
             index = result.indexOf(id);
-            setTeam(team => team.splice(index - 1, 1))
+            setTeam(team => team.splice(index, 1))
         }
     }
+
 
 
     return (

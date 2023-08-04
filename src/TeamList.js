@@ -30,6 +30,8 @@ div {
 }
 `
 
+
+
 export default function Team(props) {
     const navigate = useNavigate();
     const { fname, lname, email, role, id, team, setTeam, deleted, setDeleted, finalDecision, setFinalDecision, formData } = props;

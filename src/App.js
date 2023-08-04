@@ -8,7 +8,7 @@ import { StyledDiv, Div } from './StyledDivs';
 import TeamList from "./TeamList";
 import Home from './Home'
 import TeamForm from "./TeamForm";
-
+import Extra from './Extra';
 
 const teamURL = "https://www.svgrepo.com/show/332577/team.svg";
 const addToTeam = "https://www.svgrepo.com/show/347812/person-add.svg";
@@ -20,9 +20,10 @@ function App() {
     role: '',
     email: '',
   });
-  const [team, setTeam] = useState([])
-  const [select, setSelect] = useState(false)
-  const [formError, setFormError] = useState('')
+  const [team, setTeam] = useState([]);
+  const [select, setSelect] = useState(false);
+  const [formError, setFormError] = useState('');
+  const [deleted,setDeleted] = useState(false); 
 
   const change = event => {
     if (event.target.name == "fname"
@@ -59,6 +60,11 @@ function App() {
     } else {
       axios.post('www.api.com', newMember)
         .then(res => {
+          let values = Object.values(team).map(r => r.email)
+          if (values.includes(res.data.email)) {
+            setFormError("Cannot be a duplicate entry")
+            setSelect(select => select = true)
+          } else {
           setTeam(team.concat(res.data))
           setTeam([res.data,...team])
           setSelect(select => select = false)
@@ -68,7 +74,7 @@ function App() {
             email: '',
             role: '',
           })
-        })
+        }})
     }
   }
   useEffect(() => {
@@ -76,7 +82,7 @@ function App() {
       .then((res) =>
         setTeam(res.data))
   }, [])
-  console.log(typeof team)
+
   return (
     <div>
       <Div>
@@ -91,6 +97,9 @@ function App() {
           style = {{backgroundImage : "linear-gradient(to right, white 0%, lightblue 100%"}} key = {t.id} fname = {t.fname}
           lname = {t.lname} email = {t.email} 
           role = {t.role} 
+          id = {t.id}
+          team = {team}
+          setTeam = {setTeam}
            />
         })
         } />
@@ -101,6 +110,7 @@ function App() {
           select={select}
           formError={formError} />}
         />
+        <Route path="team/*" element = {<Extra />}/>
       </Routes>
     </div>
   );

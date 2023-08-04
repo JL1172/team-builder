@@ -20,6 +20,9 @@ function App() {
     role: '',
     email: '',
   });
+  const [team,setTeam] = useState([])
+  const [select,setSelect] = useState(false)
+  const [formError,setFormError] = useState('')
 
   const change = event => {
     if (event.target.name == "fname" 
@@ -30,17 +33,33 @@ function App() {
         ...formData,
         [event.target.name]: event.target.value
       })
+      setSelect(select => select = false)
     }
   } else {
     setFormData({
       ...formData, 
       [event.target.name] : event.target.value 
     })
+    setSelect(select => select = false)
   }
 }
 
   const submit = event => {
     event.preventDefault();
+    if (!formData.fname || !formData.email || !formData.lname || !formData.role) {
+      setSelect(select => select = true)
+      setFormError("Please fill all inputs")
+    } else {
+      setSelect(select => select = false)
+      setFormData({
+        fname : '',
+        lname : '',
+        email : '',
+        role : '',
+      })
+    }
+
+   
 
   }
   return (
@@ -56,7 +75,10 @@ function App() {
         <Route path="teambuilder" element={<TeamForm
           change={change}
           submit={submit}
-          formData={formData} />} />
+          formData={formData} 
+          select = {select}
+          formError = {formError}/>}
+         />
       </Routes>
     </div>
   );

@@ -153,6 +153,7 @@ div {
     height : 75%;
     text-align : center;
     padding-top : 1rem;
+    margin-top : 1rem;
     background-color : white;
     border-radius : 10px;
     box-shadow : 2px 2px 2px 2px whitesmoke;
@@ -170,8 +171,17 @@ div {
         margin-bottom : 2rem;
         display : flex;
         width : 20%;
+        margin-left : 2rem; 
+      }
+      label {
+        margin-left : 2rem; 
+      }
+      select {
+        margin-bottom : 2rem; 
+        margin-left : 2rem; 
       }
 }
+
 `
 
 export { StyledDiv };

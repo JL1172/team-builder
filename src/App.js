@@ -26,6 +26,11 @@ function App() {
   const [formError, setFormError] = useState('');
   const [deleted,setDeleted] = useState(false); 
   const [finalDecision,setFinalDecision] = useState(false);
+  const [filtered,setFiltered] = useState([]);
+  
+  useEffect(()=> {
+    setFiltered(filtered => [...filtered] = team)
+  },[])
 
   const change = event => {
     if (event.target.name == "fname"
@@ -62,12 +67,13 @@ function App() {
     } else {
       axios.post('www.api.com', newMember)
         .then(res => {
-          let values = Object.values(team).map(r => r.email)
+          setFiltered(filtered => [...filtered]=team)
+          let values = Object.values(filtered).map(r => r.email)
           if (values.includes(res.data.email)) {
             setFormError("Cannot be a duplicate entry")
             setSelect(select => select = true)
           } else {
-          // setTeam(team.concat(res.data))
+          setTeam(team.concat(res.data))
           setTeam([res.data,...team])
           setSelect(select => select = false)
           setFormData({
@@ -84,7 +90,7 @@ function App() {
       .then((res) =>
         setTeam(res.data))
   }, [])
-
+console.log(filtered)
   // const deleter = (id) => {
   //   let index;
   //   let result = Object.values(team).map(t=> t.id); 
@@ -114,7 +120,7 @@ function App() {
       }
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='team' element={ team.map(t => {
+        <Route path='team' element={ filtered.map(t => {
           return <TeamList
           style = {{backgroundImage : "linear-gradient(to right, white 0%, lightblue 100%"}} key = {t.id} fname = {t.fname}
           lname = {t.lname} email = {t.email} 

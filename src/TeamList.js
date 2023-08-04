@@ -32,24 +32,25 @@ div {
 
 export default function Team(props) {
     const navigate = useNavigate();
-    const { fname, lname, email, role, id, team, setTeam, deleted, setDeleted, finalDecision, setFinalDecision } = props;
-    const nav = () => {
-        // navigate(`${id}`)
-        setDeleted(deleted => deleted = true)
-    }
+    const { fname, lname, email, role, id, team, setTeam, deleted, setDeleted, finalDecision, setFinalDecision, filtered, setFiltered } = props;
+   
 
     const deleter = () => {
         //? navigate(`${id}`)
         //?if (deleted) { make this so we have option of overwriting 
         let index;
-        let result = Object.values(team).map(t => t.id);
+        let [...referenceIndex] = team;
+        let result = Object.values(referenceIndex).map(t => t.id);
         if (result.includes(id)) {
-            index = result.indexOf(id);
-            setTeam(team => team.splice(index, 1))
+        index = result.indexOf(id)
+    
+            setTeam(team => delete team[index])
+            console.log(team)
+            console.log(team.length)
+            // setTeam()
         }
     }
-
-
+  
 
     return (
         <>

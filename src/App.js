@@ -62,8 +62,8 @@ function App() {
     } else {
       axios.post('www.api.com', newMember)
         .then(res => {
-          let values = Object.values(team).map(r => r.email)
-          if (values.includes(res.data.email)) {
+          let values = Object.values(team).map(r => r.email || formData.email || newMember.email)
+          if (values.includes(res.data.email) || values.includes(newMember.email)) {
             setFormError("Cannot be a duplicate entry")
             setSelect(select => select = true)
           } else {
@@ -109,25 +109,46 @@ function App() {
         <Link to="team"><img src={teamURL} />Team</Link>
         <Link to="teambuilder"><img src={addToTeam} />Add to Team</Link>
       </Div>
-      {deleted && <Alert style={alertStyle}>Are you sure  <Button  style = {style}>Yes</Button> 
+      {/* {deleted && <Alert style={alertStyle}>Are you sure  <Button  style = {style}>Yes</Button> 
       <Button  style = {style}>No</Button> </Alert>
-      }
+      } */}
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='team' element={ team.map(t => {
-          return <TeamList
-          style = {{backgroundImage : "linear-gradient(to right, white 0%, lightblue 100%"}} key = {t.id} fname = {t.fname}
-          lname = {t.lname} email = {t.email} 
+        <Route path='team' element={ (team).map((t,i) => { return t || t !== undefined ? 
+            <TeamList
+          style = {{backgroundImage : "linear-gradient(to right, white 0%, lightblue 100%"}} key = {t.id}
+           fname = {t.fname}
+          lname = {t.lname} 
+          email = {t.email || formData.email} 
           role = {t.role} 
-          id = {t.id}
+          id = {t.id ? t.id : i}
           team = {team}
           setTeam = {setTeam}
           deleted = {deleted}
           setDeleted = {setDeleted}
           finalDecision = {finalDecision}
           setFinalDecision = {setFinalDecision}
+          formData = {formData}
            />
+         : 
+         console.log('this didnt work')
         })
+        //!
+        //  : Object.values(team).map((t,i) => {
+        //   console.log(t[i+1])
+        //   return <TeamList
+        //   style = {{backgroundImage : "linear-gradient(to right, white 0%, lightblue 100%"}} key = {t.id} fname = {t.fname}
+        //   lname = {t.lname} email = {t.email} 
+        //   role = {t.role} 
+        //   id = {t.id}
+        //   team = {team}
+        //   setTeam = {setTeam}
+        //   deleted = {deleted}
+        //   setDeleted = {setDeleted}
+        //   finalDecision = {finalDecision}
+        //   setFinalDecision = {setFinalDecision}
+        //    />
+        // })
         } />
         <Route path="teambuilder" element={<TeamForm
           change={change}

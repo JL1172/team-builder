@@ -32,20 +32,33 @@ div {
 
 export default function Team(props) {
     const navigate = useNavigate();
-    const { fname, lname, email, role, id, team, setTeam, deleted, setDeleted, finalDecision, setFinalDecision } = props;
+    const { fname, lname, email, role, id, team, setTeam, deleted, setDeleted, finalDecision, setFinalDecision, formData } = props;
     const nav = () => {
         // navigate(`${id}`)
         setDeleted(deleted => deleted = true)
     }
 
     const deleter = () => {
+        setDeleted(deleted => deleted = true)
         //? navigate(`${id}`)
         //?if (deleted) { make this so we have option of overwriting 
         let index;
+        let number = Math.random()*1500;
         let result = Object.values(team).map(t => t.id);
-        if (result.includes(id)) {
+        if (result.includes(id) || result.includes(fname)) {
             index = result.indexOf(id);
-            setTeam(team => team.splice(index, 1))
+            const [...reference] = team;
+            delete reference[index];
+            
+            setTeam(team => team = reference)
+            setTeam(team => team.filter(f => f))
+            console.log(reference)
+            
+            // const [...newT] = reference; 
+            // setTeam({reference})
+    
+            // console.log(team)
+            
         }
     }
 

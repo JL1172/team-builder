@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from './axios';
 import Reactstrap from 'reactstrap';
 import styled from 'styled-components';
 import { keyframes } from "styled-components";

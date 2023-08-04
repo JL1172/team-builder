@@ -140,7 +140,6 @@ a:hover {
 
 
 `
-
 const Styled = styled.div`
 background-image : linear-gradient(to right, white 0%, lightblue 100%);
 height : 100vh;
@@ -172,6 +171,11 @@ div {
         display : flex;
         width : 20%;
         margin-left : 2rem; 
+        &:focus {
+          border : none;
+          outline: ${props => props.select ? "3px solid rgb(224, 153, 153)" : "2px solid lightblue"};
+          
+        }
       }
       label {
         margin-left : 2rem; 
@@ -181,9 +185,9 @@ div {
         margin-left : 2rem; 
       }
 }
-
 `
 
 export { StyledDiv };
 export { Div };
-export { Styled };
+export {Styled}
+;

@@ -13,24 +13,25 @@ const Button = styled.input`
   height: 4vh;
   border-radius: 7px;
   border: none;
-  background-color: lightskyblue;
+  background-color: ${props => props.select ? "rgb(224, 153, 153)" : "lightskyblue"};
   color : rgb(255, 255, 255);
   transition: .1s ease-in-out;
   &:hover {
-    outline: 2px solid rgb(133, 152, 211);
+    outline: ${props => props.select ? "none" : "2px solid rgb(133, 152, 211)"};
   transition: .1s ease-in-out;
   }
   &:active {
     outline-offset:  3px;
-  background-color: rgb(183, 224, 250);
-  transform: scale(1.1);
+  background-color: ${props => props.select ? "none" : "rgb(183, 224, 250)"};
+  transform: ${props => props.select ? "none" : "scale(1.1)"};
   }
 `
+
 
 export default function TeamForm(props) {
     const { change, submit, formData, select, formError } = props;
     return (
-        <Styled>
+        <Styled select = {select}>
             <div>
                 <h1>Add Team Members</h1>
                 <form id = "form" onSubmit={submit}>
@@ -71,7 +72,7 @@ export default function TeamForm(props) {
                         value={formData.email} />
                     {select && <Alert color = "danger" 
                     style = {{backgroundColor : "rgb(226, 153, 153)", marginLeft : "2rem"}}>{formError}</Alert>}
-                    <Button disabled = {select} type="submit" value = "Submit" id = "submit" />
+                    <Button disabled = {select} select = {select} type="submit" value = "Submit" id = "submit" />
                 </form>
             </div>
         </Styled>

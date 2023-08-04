@@ -65,7 +65,7 @@ function App() {
             setFormError("Cannot be a duplicate entry")
             setSelect(select => select = true)
           } else {
-          setTeam(team.concat(res.data))
+          // setTeam(team.concat(res.data))
           setTeam([res.data,...team])
           setSelect(select => select = false)
           setFormData({
@@ -100,6 +100,8 @@ function App() {
           id = {t.id}
           team = {team}
           setTeam = {setTeam}
+          deleted = {deleted}
+          setDeleted = {setDeleted}
            />
         })
         } />

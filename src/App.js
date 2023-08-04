@@ -83,6 +83,20 @@ function App() {
         setTeam(res.data))
   }, [])
 
+  // const deleter = (id) => {
+  //   let index;
+  //   let result = Object.values(team).map(t=> t.id); 
+  //   if (result.includes(id)) {
+  //       index = result.indexOf(id);
+  //       setTeam(team=> team.splice(index - 1,1))
+  //   }
+  // }
+  const yes = () => {
+    setDeleted(deleted => deleted = true)
+  }
+  const no = () => {
+    setDeleted(deleted => deleted = false)
+  }
   return (
     <div>
       <Div>
@@ -112,7 +126,8 @@ function App() {
           select={select}
           formError={formError} />}
         />
-        <Route path="team/*" element = {<Extra />}/>
+        <Route path="team/:id" element = {<Extra no = {no} yes = {yes} deleted = {deleted}
+        setDeleted = {setDeleted}/>}/>
       </Routes>
     </div>
   );

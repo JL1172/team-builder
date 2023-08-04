@@ -20,48 +20,63 @@ function App() {
     role: '',
     email: '',
   });
-  const [team,setTeam] = useState([])
-  const [select,setSelect] = useState(false)
-  const [formError,setFormError] = useState('')
+  const [team, setTeam] = useState([])
+  const [select, setSelect] = useState(false)
+  const [formError, setFormError] = useState('')
 
   const change = event => {
-    if (event.target.name == "fname" 
-      || event.target.name == "role" 
-      || event.target.name == "lname" ) {
-    if (/^[A-Za-z]*$/.test(event.target.value)) {
+    if (event.target.name == "fname"
+      || event.target.name == "role"
+      || event.target.name == "lname") {
+      if (/^[A-Za-z]*$/.test(event.target.value)) {
+        setFormData({
+          ...formData,
+          [event.target.name]: event.target.value
+        })
+        setSelect(select => select = false)
+      }
+    } else {
       setFormData({
         ...formData,
         [event.target.name]: event.target.value
       })
       setSelect(select => select = false)
     }
-  } else {
-    setFormData({
-      ...formData, 
-      [event.target.name] : event.target.value 
-    })
-    setSelect(select => select = false)
   }
-}
 
   const submit = event => {
     event.preventDefault();
-    if (!formData.fname || !formData.email || !formData.lname || !formData.role) {
+
+    const newMember = {
+      fname: formData.fname,
+      lname: formData.lname,
+      email: formData.email,
+      role: formData.role,
+    }
+    if (!newMember.fname || !newMember.email || !newMember.lname || !newMember.role) {
       setSelect(select => select = true)
       setFormError("Please fill all inputs")
     } else {
-      setSelect(select => select = false)
-      setFormData({
-        fname : '',
-        lname : '',
-        email : '',
-        role : '',
-      })
+      axios.post('www.api.com', newMember)
+        .then(res => {
+          setTeam(team.concat(res.data))
+          setTeam([res.data,...team])
+          setSelect(select => select = false)
+          setFormData({
+            fname: '',
+            lname: '',
+            email: '',
+            role: '',
+          })
+        })
     }
-
-   
-
   }
+  useEffect(() => {
+    axios.get('www.api.com')
+      .then((res) =>
+        setTeam(res.data))
+  }, [])
+  console.log(typeof team)
   return (
     <div>
       <Div>
@@ -71,14 +86,21 @@ function App() {
       </Div>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='team' element={<TeamList />} />
+        <Route path='team' element={ team.map(t => {
+          return <TeamList
+          style = {{backgroundImage : "linear-gradient(to right, white 0%, lightblue 100%"}} key = {t.id} fname = {t.fname}
+          lname = {t.lname} email = {t.email} 
+          role = {t.role} 
+           />
+        })
+        } />
         <Route path="teambuilder" element={<TeamForm
           change={change}
           submit={submit}
-          formData={formData} 
-          select = {select}
-          formError = {formError}/>}
-         />
+          formData={formData}
+          select={select}
+          formError={formError} />}
+        />
       </Routes>
     </div>
   );

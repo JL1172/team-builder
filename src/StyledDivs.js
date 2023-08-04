@@ -191,3 +191,25 @@ export { StyledDiv };
 export { Div };
 export {Styled}
 ;
+
+
+// const NewStyle = styled.div`
+// background-image : linear-gradient(to right, white 0%, lightblue 100%);
+// height : 200vh;
+// display : flex;
+// flex-direction : column;
+
+// div {
+//     display : flex;
+//     margin-top : 2rem;
+//     margin-left : 2rem;
+//     margin-right : 2rem;
+//     padding : 1rem;
+//     background-color : white;
+//     box-shadow : 2px 2px 2px gray;
+//     font-size : 15px;
+//     opacity : .8;
+//     font-weight : lighter;
+//     justify-content: space-between;
+// }
+// `

@@ -34,8 +34,7 @@ export default function Team(props) {
     const navigate = useNavigate();
     const { fname, lname, email, role, id, team, setTeam, deleted, setDeleted, finalDecision, setFinalDecision, formData } = props;
     const nav = () => {
-        // navigate(`${id}`)
-        setDeleted(deleted => deleted = true)
+        navigate(`${id}`)
     }
 
     const deleter = () => {
@@ -61,7 +60,6 @@ export default function Team(props) {
             
         }
     }
-
 
 
     return (

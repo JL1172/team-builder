@@ -13,7 +13,6 @@ import {Alert, Button} from 'reactstrap';
 
 const teamURL = "https://www.svgrepo.com/show/332577/team.svg";
 const addToTeam = "https://www.svgrepo.com/show/347812/person-add.svg";
-
 function App() {
   const [formData, setFormData] = useState({
     fname: '',
@@ -26,6 +25,11 @@ function App() {
   const [formError, setFormError] = useState('');
   const [deleted,setDeleted] = useState(false); 
   const [finalDecision,setFinalDecision] = useState(false);
+  const [filtered,setFiltered] = useState([]);
+  
+  useEffect(()=> {
+    setFiltered(filtered => [...filtered] = team)
+  },[])
 
   const change = event => {
     if (event.target.name == "fname"
@@ -46,10 +50,8 @@ function App() {
       setSelect(select => select = false)
     }
   }
-
   const submit = event => {
     event.preventDefault();
-
     const newMember = {
       fname: formData.fname,
       lname: formData.lname,
@@ -67,7 +69,7 @@ function App() {
             setFormError("Cannot be a duplicate entry")
             setSelect(select => select = true)
           } else {
-          // setTeam(team.concat(res.data))
+          setTeam(team.concat(res.data))
           setTeam([res.data,...team])
           setSelect(select => select = false)
           setFormData({
@@ -84,7 +86,6 @@ function App() {
       .then((res) =>
         setTeam(res.data))
   }, [])
-
   // const deleter = (id) => {
   //   let index;
   //   let result = Object.values(team).map(t=> t.id); 
@@ -93,7 +94,7 @@ function App() {
   //       setTeam(team=> team.splice(index - 1,1))
   //   }
   // }
-  //! const yes = () => { for deletintg but they wipe out entire field 
+    //! const yes = () => { for deletintg but they wipe out entire field 
   // !  setDeleted(deleted => deleted = true);
   // !  setFinalDecision(finalDecision=> finalDecision = true)
   // !}
@@ -157,11 +158,10 @@ function App() {
           select={select}
           formError={formError} />}
         />
-        <Route path="team/:id" element = {<Extra deleted = {deleted}
+             <Route path="team/:id" element = {<Extra deleted = {deleted}
         setDeleted = {setDeleted}/>}/>
       </Routes>
     </div>
   );
 }
-
 export default App;

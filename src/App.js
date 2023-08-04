@@ -13,7 +13,6 @@ import {Alert, Button} from 'reactstrap';
 
 const teamURL = "https://www.svgrepo.com/show/332577/team.svg";
 const addToTeam = "https://www.svgrepo.com/show/347812/person-add.svg";
-
 function App() {
   const [formData, setFormData] = useState({
     fname: '',
@@ -46,10 +45,8 @@ function App() {
       setSelect(select => select = false)
     }
   }
-
   const submit = event => {
     event.preventDefault();
-
     const newMember = {
       fname: formData.fname,
       lname: formData.lname,
@@ -84,7 +81,6 @@ function App() {
       .then((res) =>
         setTeam(res.data))
   }, [])
-
   // const deleter = (id) => {
   //   let index;
   //   let result = Object.values(team).map(t=> t.id); 
@@ -93,7 +89,7 @@ function App() {
   //       setTeam(team=> team.splice(index - 1,1))
   //   }
   // }
-  //! const yes = () => { for deletintg but they wipe out entire field 
+    //! const yes = () => { for deletintg but they wipe out entire field 
   // !  setDeleted(deleted => deleted = true);
   // !  setFinalDecision(finalDecision=> finalDecision = true)
   // !}
@@ -114,7 +110,7 @@ function App() {
       }
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='team' element={ team.map(t => {
+        <Route path='team' element={Object.values(team).map(t => {
           return <TeamList
           style = {{backgroundImage : "linear-gradient(to right, white 0%, lightblue 100%"}} key = {t.id} fname = {t.fname}
           lname = {t.lname} email = {t.email} 
@@ -136,11 +132,10 @@ function App() {
           select={select}
           formError={formError} />}
         />
-        <Route path="team/:id" element = {<Extra deleted = {deleted}
+             <Route path="team/:id" element = {<Extra deleted = {deleted}
         setDeleted = {setDeleted}/>}/>
       </Routes>
     </div>
   );
 }
-
 export default App;

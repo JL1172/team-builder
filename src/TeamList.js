@@ -41,7 +41,8 @@ export default function Team(props) {
         //? navigate(`${id}`)
         //?if (deleted) { make this so we have option of overwriting 
         let index;
-        let result = Object.values(team).map(t => t.id);
+        let [...referenceIndex] = team;
+        let result = Object.values(referenceIndex).map(t => t.id);
         if (result.includes(id)) {
             index = result.indexOf(id);
             setTeam(team=> team.splice(index,1))

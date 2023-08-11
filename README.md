@@ -33,7 +33,7 @@ A mock API is used under the file `axios`
 ## Credits 
 Thank you to all my amazing instructors at BloomTech for inspiring me to excel and teaching me so much!
 
-### Licence 
+### License 
 MIT JL1172
 
 
